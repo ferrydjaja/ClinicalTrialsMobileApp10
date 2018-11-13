@@ -291,6 +291,8 @@ sap.ui.define([
 			var city = "";
 
 			var oModelPath = this.getOwnerComponent().getModel("ScrModel");
+			var conn = CryptoJS.AES.decrypt(oModelPath.oData[0].conn, "pfect");
+			conn = conn.toString(CryptoJS.enc.Utf8);
 
             if (cond.length >= 3) {
                 wasteTime();
@@ -303,7 +305,7 @@ sap.ui.define([
                     dataType: "json",
                     timeout: 600000, 
                     contentType: "application/json; charset=utf-8",
-                    url: oModelPath.oData[0].conn + "?q=5&location=" + location,
+                    url: conn + "?q=5&location=" + location,
                     success: function(data) {
 
 						var proceed = true;
@@ -356,7 +358,7 @@ sap.ui.define([
 								dataType: "json",
 								timeout: 600000, 
 								contentType: "application/json; charset=utf-8",
-								url: oModelPath.oData[0].conn + "?q=1&cond=" + cond + "&term=" + term + "&cntry=" + cntry + "&state=" + state + "&city=" + city + "&lead=" + lead + "&recrs=" + recrs + "&gndr=" + gndr + "&age=" + age + "&dist=" + dist + "&lat=" + lat + "&lng=" + lng,
+								url: conn + "?q=1&cond=" + cond + "&term=" + term + "&cntry=" + cntry + "&state=" + state + "&city=" + city + "&lead=" + lead + "&recrs=" + recrs + "&gndr=" + gndr + "&age=" + age + "&dist=" + dist + "&lat=" + lat + "&lng=" + lng,
 								success: function(data) {
 									console.log(data);
 
